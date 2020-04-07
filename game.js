@@ -11,9 +11,11 @@ var Score1 = 0;
 var Score2 = 0;
 var winScreen = true;
 var gameStatus = "'re Welcome";
+var canv = document.getElementById("canvas-container");
 const PADDLE_HEIGHT = 100;
 const PADDLE_THICKNESS = 10;
 const WINNING_SCORE = 10;
+
 
 function getMousePos(evt){
     var rect = canvas.getBoundingClientRect();
@@ -28,12 +30,24 @@ function getMousePos(evt){
 
 function handleMouseClick(evt){
     if(winScreen){
+        openFullscreen();
         winScreen = false;
         Score1 = 0;
         Score2 = 0;
     }
 }
 
+function openFullscreen() {
+  if (canv.requestFullscreen) {
+    canv.requestFullscreen();
+  } else if (canv.mozRequestFullScreen) { /* Firefox */
+    canv.mozRequestFullScreen();
+  } else if (canv.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+    canv.webkitRequestFullscreen();
+  } else if (canv.msRequestFullscreen) { /* IE/Edge */
+    canv.msRequestFullscreen();
+  }
+}
 
 window.onload = function(){
     console.log("Page loaded!");
@@ -143,6 +157,7 @@ function drawNet(){
         colorRect(canvas.width/2-1, i, 2, 20, 'white');
     }
 }
+
 function draw(){
     //Fills screen with black
     colorRect(0,0,canvas.width, canvas.height, 'black');
@@ -151,6 +166,8 @@ function draw(){
         canvasContext.fillStyle = "white";
         var str = "You"+ gameStatus + ". Click to Continue";
         canvasContext.fillText(str, canvas.width*0.45, canvas.height/2);
+        
+        
         return;
     }
 
