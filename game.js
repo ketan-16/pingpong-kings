@@ -31,7 +31,7 @@ function getMousePos(evt){
 
 function handleMouseClick(evt){
     if(winScreen){
-        openFullscreen();
+        //openFullscreen();
         winScreen = false;
         Score1 = 0;
         Score2 = 0;
@@ -171,13 +171,14 @@ function drawNet(){
 
 function draw(){
     //Fills screen with black
-    colorRect(0,0,canvas.width, canvas.height, 'black');
+    colorRect(0,0,canvas.width, canvas.height, '#0a0a0a');
     
     if(winScreen){
         canvasContext.fillStyle = "white";
         var str = "You"+ gameStatus + ". Click to Continue";
-        canvasContext.fillText(str, canvas.width*0.45, canvas.height/2);
-        canvasContext.fillText("Level "+level, canvas.width*0.5, canvas.height * .45);
+        canvasContext.font = "20px Arial";
+        canvasContext.fillText(str, canvas.width*0.35, canvas.height/2);
+        canvasContext.fillText("Level "+level, canvas.width*0.47, canvas.height * .45);
         
         
         return;
