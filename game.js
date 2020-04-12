@@ -1,20 +1,21 @@
 var canvas;
 var canvasContext;
 var ballx = 20;
-var ballSpeedX = 6; 
+var ballSpeedX = 3; 
 var bally = 20;
-var ballSpeedY = 6;
+var ballSpeedY = 3;
 var paddle1X = 0;
 var paddle1Y = 250;
 var paddle2Y = 250;
 var Score1 = 0;
 var Score2 = 0;
+var level = 1;
 var winScreen = true;
 var gameStatus = "'re Welcome";
 var canv = document.getElementById("canvas-container");
 const PADDLE_HEIGHT = 100;
 const PADDLE_THICKNESS = 10;
-const WINNING_SCORE = 10;
+const WINNING_SCORE = 3;
 
 
 function getMousePos(evt){
@@ -72,22 +73,13 @@ function startTheMagic(){
 }
 
 function resetBall(){
-    if(Score1 >= WINNING_SCORE){
-        winScreen = true;
-        gameStatus = " Won"
-    } 
-    if(Score2 >= WINNING_SCORE){
-        winScreen = true;
-        gameStatus = " Lost"
-        //console.log("Somebody won!");
-        
-    }
+    
     ballSpeedX = -ballSpeedX;
     if(ballSpeedX>0){
-        ballSpeedX = 5;
+        ballSpeedX = level+2;
     }
     else{
-        ballSpeedX = -5;
+        ballSpeedX = level+2;
     }
 
     if(ballSpeedY>0){
@@ -98,6 +90,25 @@ function resetBall(){
     }
     ballx = canvas.width/2;
     bally = canvas.height/2;
+
+    if(Score1 >= WINNING_SCORE){
+        winScreen = true;
+        gameStatus = " Won"
+        level+=1;
+        
+    } 
+    if(Score2 >= WINNING_SCORE){
+        winScreen = true;
+        gameStatus = " Lost"
+        if(level==1){
+            console.log('Level 1');
+        } else{
+            level-=1;
+        }
+            
+        //console.log("Somebody won!");
+        
+    }
 
 }
 
@@ -166,6 +177,7 @@ function draw(){
         canvasContext.fillStyle = "white";
         var str = "You"+ gameStatus + ". Click to Continue";
         canvasContext.fillText(str, canvas.width*0.45, canvas.height/2);
+        canvasContext.fillText("Level "+level, canvas.width*0.5, canvas.height * .45);
         
         
         return;
