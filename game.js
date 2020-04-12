@@ -170,7 +170,7 @@ function drawNet(){
 }
 
 function draw(){
-    //Fills screen with black
+
     colorRect(0,0,canvas.width, canvas.height, '#0a0a0a');
     
     if(winScreen){
